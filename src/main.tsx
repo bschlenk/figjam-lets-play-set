@@ -1,37 +1,40 @@
-const { widget } = figma
-const { Frame, SVG, Text, useSyncedState, usePropertyMenu } = widget
+import { AttrColor, AttrShade, AttrShape } from './attributes';
+import { Shape } from './shape';
+
+const { widget } = figma;
+const { Frame, SVG, Text, useSyncedState, usePropertyMenu } = widget;
 
 const buttonSrc = `
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
   <circle cx="16" cy="16" r="15.5" stroke="black" stroke-opacity="0.1" fill="white"/>
   <path fill-rule="evenodd" clip-rule="evenodd" d="M17 8H15V15H8V17H15V24H17V17H24V15H17V8Z" fill="black" fill-opacity="0.8"/>
   </svg>
-`
+`;
 
-function Counter() {
-  const [count, setCount] = useSyncedState('count', 0)
+export function Counter() {
+  const [count, setCount] = useSyncedState('count', 0);
   const propertyMenu: WidgetPropertyMenuItem[] = [
     {
       tooltip: 'Increment',
       propertyName: 'increment',
       itemType: 'action',
     },
-  ]
+  ];
   if (count > 0) {
     propertyMenu.push({
       tooltip: 'Decrement',
       propertyName: 'decrement',
       itemType: 'action',
-    })
+    });
   }
 
   usePropertyMenu(propertyMenu, ({ propertyName }) => {
     if (propertyName === 'decrement') {
-      setCount(count - 1)
+      setCount(count - 1);
     } else if (propertyName === 'increment') {
-      setCount(count + 1)
+      setCount(count + 1);
     }
-  })
+  });
 
   return (
     <Frame
@@ -66,6 +69,5 @@ function Counter() {
         </Text>
       </Frame>
     </Frame>
-  )
+  );
 }
-widget.register(Counter)

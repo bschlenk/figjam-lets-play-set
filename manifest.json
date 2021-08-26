@@ -2,7 +2,7 @@
   "name": "Let's Play Set!",
   "id": "1011641929132435074",
   "api": "1.0.0",
-  "main": "dist/main.js",
+  "main": "bundle.js",
   "editorType": [
     "figjam"
   ],
