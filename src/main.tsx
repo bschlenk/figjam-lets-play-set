@@ -68,6 +68,21 @@ export function Counter() {
           {count}
         </Text>
       </Frame>
+      <Shape
+        shape={AttrShape.SQUIGGLE}
+        color={AttrColor.PURPLE}
+        shade={AttrShade.STRIPED}
+      />
+      <Shape
+        shape={AttrShape.OVAL}
+        color={AttrColor.PURPLE}
+        shade={AttrShade.STRIPED}
+      />
+      <Shape
+        shape={AttrShape.DIAMOND}
+        color={AttrColor.PURPLE}
+        shade={AttrShade.STRIPED}
+      />
     </Frame>
   );
 }
