@@ -1,0 +1,15 @@
+{
+  "name": "lets-play-set",
+  "version": "1.0.0",
+  "description": "Play the game of Set in FigJam",
+  "author": "Brian Schlenker <bschlenk@umich.edu>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "file:./plugin-typings",
+    "typescript": "^4.3.5"
+  }
+}
