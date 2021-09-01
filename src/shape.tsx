@@ -3,7 +3,7 @@ import { COLOR_RED, COLOR_GREEN, COLOR_PURPLE } from './constants';
 
 const { SVG } = figma.widget;
 
-export interface ShapeProps {
+interface ShapeProps {
   color: AttrColor;
   shade: AttrShade;
   shape: AttrShape;
@@ -32,8 +32,6 @@ export function Shape({ color, shade, shape }: ShapeProps) {
       ${makePath(shapePath)}
     </svg>
   `;
-
-  console.log(svgSrc);
 
   return <SVG src={svgSrc} />;
 }

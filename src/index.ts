@@ -1,3 +1,3 @@
-import { Counter } from './main';
+import { SetGame } from './main';
 
-figma.widget.register(Counter)
+figma.widget.register(SetGame);
