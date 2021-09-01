@@ -1287,7 +1287,7 @@ declare global {
     rotation?: number
     width?: number | 'fill-parent' | 'hug-contents'
     height?: number | 'fill-parent' | 'hug-contents'
-    onMouseDown?: () => void | Promise<void>
+    onClick?: () => void | Promise<void>
   }
 
   interface RectanglePropsMixin {
