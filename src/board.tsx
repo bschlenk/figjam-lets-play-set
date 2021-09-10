@@ -1,7 +1,7 @@
 import { Card } from './card';
 import { ICard } from './model';
 
-const { Frame, Text } = figma.widget;
+const { AutoLayout } = figma.widget;
 
 interface Props {
   cards: ICard[];
@@ -11,17 +11,18 @@ interface Props {
 
 export function Board({ cards, selected, onClick }: Props) {
   return (
-    <Frame
+    <AutoLayout
       direction="vertical"
       width="hug-contents"
       height="hug-contents"
-      spacing={8}
+      padding={{ top: 6, bottom: 2 }}
     >
       {byChunks(cards, 4).map((row) => (
-        <Frame
+        <AutoLayout
           direction="horizontal"
           width="hug-contents"
           height="hug-contents"
+          padding={{ top: 2, bottom: 6, left: 8, right: 8 }}
           spacing={8}
         >
           {row.map((card) => (
@@ -31,9 +32,9 @@ export function Board({ cards, selected, onClick }: Props) {
               selected={selected.includes(card)}
             />
           ))}
-        </Frame>
+        </AutoLayout>
       ))}
-    </Frame>
+    </AutoLayout>
   );
 }
 
