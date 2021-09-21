@@ -1157,7 +1157,7 @@ declare global {
   interface CurrentUser {
     readonly id: string
     readonly name: string
-    readonly photoURL: string
+    readonly photoUrl: string
 
     // The current user's multiplayer color. This will match the color of their
     // dot stamps and cursor.
@@ -1302,7 +1302,7 @@ declare global {
 
     export interface SolidPaint extends PaintProps {
       type: 'solid'
-      color: Color
+      color: Color | HexCode
     }
 
     export interface ColorStop {
