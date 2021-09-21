@@ -7,7 +7,7 @@
   "main": "bundle.js",
   "scripts": {
     "build": "tsc && esbuild --bundle --minify dist/index.js > bundle.js",
-    "watch": "nodemon --watch src --ext 'ts,tsx' --exec 'npm run build'"
+    "start": "nodemon --watch src --ext 'ts,tsx' --exec 'npm run build'"
   },
   "devDependencies": {
     "@figma/plugin-typings": "file:plugin-typings",
