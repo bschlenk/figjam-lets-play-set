@@ -5,6 +5,7 @@ import { Shape } from './shape';
 const { AutoLayout } = figma.widget;
 
 interface Props {
+  key?: string | number;
   card: ICard;
   selected: boolean;
   onClick: (card: ICard) => void;
@@ -15,6 +16,7 @@ export function Card({ card, selected, onClick }: Props) {
 
   return (
     <AutoLayout
+      key={card}
       direction="vertical"
       horizontalAlignItems="center"
       verticalAlignItems="center"
@@ -22,7 +24,7 @@ export function Card({ card, selected, onClick }: Props) {
       height={168}
       cornerRadius={8}
       stroke={selected ? '#16abff' : undefined}
-      strokeWidth={2}
+      strokeWidth={3}
       fill="#fff"
       effect={{
         type: 'drop-shadow',

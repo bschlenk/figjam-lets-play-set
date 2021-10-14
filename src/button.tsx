@@ -4,12 +4,13 @@ const { AutoLayout, Text } = figma.widget;
 
 interface Props extends Clickable {
   label: string;
+  disabled?: boolean;
 }
 
-export function Button({ label, onClick }: Props) {
+export function Button({ label, disabled, onClick }: Props) {
   return (
     <AutoLayout
-      fill="#52b6ff"
+      fill={disabled ? '#7b858c' : '#52b6ff'}
       padding={{ top: 12, bottom: 12, left: 24, right: 24 }}
       cornerRadius={8}
       effect={{
@@ -18,7 +19,9 @@ export function Button({ label, onClick }: Props) {
         offset: { x: 0, y: 4 },
         color: { r: 0, g: 0, b: 0, a: 0.25 },
       }}
-      onClick={onClick}
+      onClick={() => {
+        onClick && onClick();
+      }}
     >
       <Text fontSize={24} fill="#fff">
         {label}

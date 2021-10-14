@@ -1,12 +1,12 @@
-import { Avatar } from './avatar';
+import { AvatarList } from './avatar-list';
 import { Button } from './button';
-import { Clickable } from './types';
+import { Clickable, IUser } from './types';
 
-const { AutoLayout, Text, SVG, Frame } = figma.widget;
+const { AutoLayout, Text, SVG } = figma.widget;
 
 interface Props extends Clickable {
-  users: CurrentUser[];
-  onReady: () => void;
+  users: IUser[];
+  onReady?: () => void;
 }
 
 export function StartPage({ users, onClick, onReady }: Props) {
@@ -34,19 +34,20 @@ export function StartPage({ users, onClick, onReady }: Props) {
         </Text>
         <SVG src={SET_TEXT_SVG} />
       </AutoLayout>
-      {users.length === 0 ? (
+      {users.length === 0 && (
         <Text fontSize={24} fill="#4d4d4d">
           Click anywhere to join!
         </Text>
-      ) : (
-        [
-          <AutoLayout spacing={4}>
-            {users.map((user) => (
-              <Avatar user={user} />
-            ))}
-          </AutoLayout>,
-          <Button label="Ready!" onClick={onReady} />,
-        ]
+      )}
+      <AvatarList users={users} />
+      {users.length !== 0 && (
+        <Button
+          label="Ready!"
+          onClick={() => {
+            console.log('are we here??');
+            onReady();
+          }}
+        />
       )}
     </AutoLayout>
   );

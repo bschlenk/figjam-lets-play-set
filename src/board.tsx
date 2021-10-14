@@ -3,6 +3,8 @@ import { ICard } from './model';
 
 const { AutoLayout } = figma.widget;
 
+const SPACING = 16;
+
 interface Props {
   cards: ICard[];
   selected: ICard[];
@@ -15,18 +17,25 @@ export function Board({ cards, selected, onClick }: Props) {
       direction="vertical"
       width="hug-contents"
       height="hug-contents"
-      padding={{ top: 6, bottom: 2 }}
+      padding={{ top: SPACING - 2, bottom: 2 }}
     >
-      {byChunks(cards, 4).map((row) => (
+      {byChunks(cards, 4).map((row, i) => (
         <AutoLayout
+          key={i}
           direction="horizontal"
           width="hug-contents"
           height="hug-contents"
-          padding={{ top: 2, bottom: 6, left: 8, right: 8 }}
-          spacing={8}
+          padding={{
+            top: 2,
+            bottom: SPACING - 2,
+            left: SPACING,
+            right: SPACING,
+          }}
+          spacing={SPACING}
         >
           {row.map((card) => (
             <Card
+              key={card}
               card={card}
               onClick={onClick}
               selected={selected.includes(card)}
