@@ -1,11 +1,10 @@
 {
   "name": "Let's Play Set!",
-  "id": "1023447529592648895",
+  "id": "1037079566485542953",
   "api": "1.0.0",
+  "widgetApi": "1.0.0",
+  "editorType": ["figjam"],
+  "containsWidget": true,
   "main": "bundle.js",
-  "editorType": [
-    "figjam"
-  ],
-  "permissions": ["currentuser"],
-  "containsWidget": true
+  "permissions": ["currentuser"]
 }
