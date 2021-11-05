@@ -13,13 +13,10 @@ export function createCard(
 }
 
 export function extractCardAttributes(card: ICard) {
-  const count: AttrCount = card & 0b11;
-  card >>>= 2;
-  const color: AttrColor = card & 0b11;
-  card >>>= 2;
-  const shape: AttrShape = card & 0b11;
-  card >>>= 2;
-  const shade: AttrShade = card & 0b11;
+  const count: AttrCount = (card >>> 0) & 0b11;
+  const color: AttrColor = (card >>> 2) & 0b11;
+  const shape: AttrShape = (card >>> 4) & 0b11;
+  const shade: AttrShade = (card >>> 6) & 0b11;
   return [count, color, shape, shade] as const;
 }
 
