@@ -4,7 +4,7 @@ import { IUser } from './types';
 
 const { useSyncedState, usePropertyMenu } = figma.widget;
 
-export function SetGame() {
+export function Widget() {
   const [ready, setReady] = useSyncedState('ready', false);
   const [users, setUsers] = useSyncedState<IUser[]>('users', []);
 

@@ -1,3 +1,3 @@
-import { SetGame } from './main';
+import { Widget } from './main';
 
-figma.widget.register(SetGame);
+figma.widget.register(Widget);
