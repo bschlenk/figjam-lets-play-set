@@ -35,7 +35,6 @@ export function Board({ cards, selected, onClick }: Props) {
         >
           {row.map((card) => (
             <Card
-              key={card}
               card={card}
               onClick={onClick}
               selected={selected.includes(card)}

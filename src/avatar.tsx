@@ -1,4 +1,4 @@
-import { IUser } from './types';
+import { IUser, Key } from './types';
 import { COLOR_PRIMARY, padding } from './styles';
 
 const { Image, Frame, AutoLayout, Text } = figma.widget;
@@ -9,9 +9,10 @@ interface Props {
   user: IUser;
   badge?: string | number;
   active?: boolean;
+  key?: Key;
 }
 
-export function Avatar({ user, badge, active }: Props) {
+export function Avatar({ user, badge, active, key }: Props) {
   const image = (
     <Image
       stroke={active ? COLOR_PRIMARY : '#fff'}
@@ -28,7 +29,7 @@ export function Avatar({ user, badge, active }: Props) {
   }
 
   return (
-    <Frame width={SIZE} height={SIZE}>
+    <Frame key={key} width={SIZE} height={SIZE}>
       {image}
       <AutoLayout
         x={64}

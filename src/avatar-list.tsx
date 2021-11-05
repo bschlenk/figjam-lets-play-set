@@ -16,8 +16,9 @@ export function AvatarList({ users, showScores, active }: Props) {
 
   return (
     <AutoLayout spacing={4}>
-      {users.map((user) => (
+      {users.map((user, i) => (
         <Avatar
+          key={i}
           user={user}
           badge={showScores ? user.score : undefined}
           active={active === user.id}

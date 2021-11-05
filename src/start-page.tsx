@@ -40,15 +40,7 @@ export function StartPage({ users, onClick, onReady }: Props) {
         </Text>
       )}
       <AvatarList users={users} />
-      {users.length !== 0 && (
-        <Button
-          label="Ready!"
-          onClick={() => {
-            console.log('are we here??');
-            onReady();
-          }}
-        />
-      )}
+      {users.length !== 0 && <Button label="Ready!" onClick={onReady} />}
     </AutoLayout>
   );
 }

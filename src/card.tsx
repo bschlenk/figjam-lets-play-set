@@ -5,7 +5,6 @@ import { Shape } from './shape';
 const { AutoLayout } = figma.widget;
 
 interface Props {
-  key?: string | number;
   card: ICard;
   selected: boolean;
   onClick: (card: ICard) => void;
@@ -36,8 +35,8 @@ export function Card({ card, selected, onClick }: Props) {
         onClick(card);
       }}
     >
-      {range(count + 1, () => (
-        <Shape color={color} shape={shape} shade={shade} />
+      {range(count + 1, (i) => (
+        <Shape key={i} color={color} shape={shape} shade={shade} />
       ))}
     </AutoLayout>
   );

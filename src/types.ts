@@ -7,3 +7,5 @@ type CurrentUser = typeof figma.currentUser;
 export interface IUser extends CurrentUser {
   score: number;
 }
+
+export type Key = string | number;
