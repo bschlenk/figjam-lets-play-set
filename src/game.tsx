@@ -1,11 +1,12 @@
 import { AvatarList } from './avatar-list';
 import { Board } from './board';
 import { Button } from './button';
-import { createDeck, ICard, isSet } from './model';
+import { useGameBoard } from './hooks/use-game-board';
+import { ICard, isSet } from './model';
 import { IUser } from './types';
 import { addOrRemove } from './utils';
 
-const { useSyncedState, AutoLayout } = figma.widget;
+const { Frame, useSyncedState, AutoLayout } = figma.widget;
 
 interface Props {
   users: IUser[];
@@ -19,17 +20,15 @@ export function Game({ users, setUsers }: Props) {
     'gameState',
     'IDLE',
   );
-  const [deck] = useSyncedState('deck', createDeck());
-  let [nextCardIndex, setNextCardIndex] = useSyncedState('cardIndex', 12);
-  const [board, setBoard] = useSyncedState(
-    'board',
-    deck.slice(0, nextCardIndex),
-  );
+  const board = useGameBoard();
   const [selected, setSelected] = useSyncedState<ICard[]>('selected', []);
   const [selectingUser, setSelectingUser] = useSyncedState<string | null>(
     'selectingUser',
     null,
   );
+
+  // you can't return null from the top of a widget, so we temporarily show a tiny frame
+  if (!board) return <Frame width={1} height={1} />;
 
   return (
     <AutoLayout
@@ -40,40 +39,39 @@ export function Game({ users, setUsers }: Props) {
     >
       <AvatarList showScores active={selectingUser} users={users} />
       <Board
-        cards={board}
+        cards={board.cards}
         selected={selected}
         onClick={(card) => {
           if (gameState !== 'SELECTING') return;
           if (figma.currentUser.id !== selectingUser) return;
 
           const nextSelected = addOrRemove(selected, card);
-          if (nextSelected.length === 3) {
-            let increment = isSet(nextSelected) ? 1 : -1;
-            setUsers(
-              users.map((user) =>
-                user.id === selectingUser
-                  ? {
-                      ...user,
-                      score: user.score + increment,
-                    }
-                  : user,
-              ),
-            );
-            setSelectingUser(null);
-            const newBoard = [...board];
-            for (let i = 0; i < newBoard.length; ++i) {
-              const card = newBoard[i];
-              if (nextSelected.includes(card)) {
-                newBoard[i] = deck[nextCardIndex++];
-              }
-            }
-            setBoard(newBoard);
-            setNextCardIndex(nextCardIndex);
-            setSelected([]);
-            setGameState('IDLE');
-          } else {
+          if (nextSelected.length !== 3) {
             setSelected(nextSelected);
+            return;
           }
+
+          const selectedCardsAreASet = isSet(nextSelected);
+          const increment = selectedCardsAreASet ? 1 : -1;
+
+          setUsers(
+            users.map((user) =>
+              user.id === selectingUser
+                ? {
+                    ...user,
+                    score: user.score + increment,
+                  }
+                : user,
+            ),
+          );
+          setSelectingUser(null);
+
+          if (selectedCardsAreASet) {
+            board.replace(nextSelected);
+          }
+
+          setSelected([]);
+          setGameState('IDLE');
         }}
       />
       <Button
