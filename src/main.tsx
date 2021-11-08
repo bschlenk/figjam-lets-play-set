@@ -1,28 +1,22 @@
 import { StartPage } from './start-page';
 import { Game } from './game';
-import { IUser } from './types';
+import { useUsers } from './hooks/use-users';
 
-const { useSyncedState, usePropertyMenu } = figma.widget;
+const { useSyncedState } = figma.widget;
 
 export function Widget() {
   const [ready, setReady] = useSyncedState('ready', false);
-  const [users, setUsers] = useSyncedState<IUser[]>('users', []);
+  const users = useUsers();
 
   if (!ready) {
     return (
       <StartPage
-        users={users}
-        onClick={() => {
-          if (!users.find((user) => user.id === figma.currentUser.id)) {
-            setUsers([...users, { ...figma.currentUser, score: 0 }]);
-          }
-        }}
-        onReady={() => {
-          setReady(true);
-        }}
+        users={users.users}
+        onClick={() => users.addSelf()}
+        onReady={() => setReady(true)}
       />
     );
   }
 
-  return <Game users={users} setUsers={setUsers} />;
+  return <Game users={users} />;
 }
