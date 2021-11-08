@@ -34,11 +34,9 @@ export function StartPage({ users, onClick, onReady }: Props) {
         </Text>
         <SVG src={SET_TEXT_SVG} />
       </AutoLayout>
-      {users.length === 0 && (
-        <Text fontSize={24} fill="#4d4d4d">
-          Click anywhere to join!
-        </Text>
-      )}
+      <Text fontSize={24} fill="#4d4d4d">
+        Click anywhere to join!
+      </Text>
       <AvatarList users={users} />
       {users.length !== 0 && <Button label="Ready!" onClick={onReady} />}
     </AutoLayout>
