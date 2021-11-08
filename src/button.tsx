@@ -11,7 +11,7 @@ export function Button({ label, disabled, onClick }: Props) {
   return (
     <AutoLayout
       fill={disabled ? '#7b858c' : '#52b6ff'}
-      padding={{ top: 12, bottom: 12, left: 24, right: 24 }}
+      padding={{ vertical: 12, horizontal: 24 }}
       cornerRadius={8}
       effect={{
         type: 'drop-shadow',

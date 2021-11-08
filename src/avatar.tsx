@@ -1,5 +1,5 @@
 import { IUser, Key } from './types';
-import { COLOR_PRIMARY, padding } from './styles';
+import { COLOR_PRIMARY } from './styles';
 
 const { Image, Frame, AutoLayout, Text } = figma.widget;
 
@@ -38,7 +38,7 @@ export function Avatar({ user, badge, active, key }: Props) {
         horizontalAlignItems="center"
         fill="#52b6ff"
         cornerRadius={1000}
-        padding={padding(4, 8)}
+        padding={{ vertical: 4, horizontal: 8 }}
       >
         <Text fill="#fff" width="hug-contents">
           {badge}
