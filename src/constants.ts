@@ -11,5 +11,5 @@ export const COLOR_RED = '#FD001A';
 export const COLOR_GREEN = '#00CC3F';
 export const COLOR_PURPLE = '#A142F5';
 
-/* The time in millis one has to point out set. */
-export const SET_TIMEOUT = 3000;
+/* The time one has to point out set. */
+export const SELECTING_SECONDS = 5;

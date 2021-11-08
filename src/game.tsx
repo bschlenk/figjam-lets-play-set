@@ -1,6 +1,9 @@
 import { AvatarList } from './avatar-list';
 import { Board } from './board';
 import { Button } from './button';
+import { SELECTING_SECONDS } from './constants';
+import { Countdown } from './countdown';
+import { useCountdown } from './hooks/use-countdown';
 import { useGameBoard } from './hooks/use-game-board';
 import { UseUsers } from './hooks/use-users';
 import { ICard, isSet } from './model';
@@ -30,6 +33,10 @@ export function Game({ users }: Props) {
     setGameState('IDLE');
   }
 
+  const countdown = useCountdown(() => {
+    finishSelectingAndUpdateScore(-1);
+  });
+
   // you can't return null from the top of a widget, so we temporarily show a tiny frame
   if (!board) return <Frame width={1} height={1} />;
 
@@ -54,6 +61,8 @@ export function Game({ users }: Props) {
             return;
           }
 
+          countdown.cancel();
+
           const selectedCardsAreASet = isSet(nextSelected);
           const increment = selectedCardsAreASet ? 1 : -1;
 
@@ -64,14 +73,19 @@ export function Game({ users }: Props) {
           finishSelectingAndUpdateScore(increment);
         }}
       />
-      <Button
-        label="Set!"
-        disabled={gameState === 'SELECTING'}
-        onClick={() => {
-          users.setActive();
-          setGameState('SELECTING');
-        }}
-      />
+      {gameState === 'SELECTING' && countdown.countdown != null ? (
+        <Countdown size={SELECTING_SECONDS} value={countdown.countdown} />
+      ) : (
+        <Button
+          label="Set!"
+          disabled={gameState === 'SELECTING'}
+          onClick={() => {
+            users.setActive();
+            setGameState('SELECTING');
+            countdown.start(SELECTING_SECONDS);
+          }}
+        />
+      )}
     </AutoLayout>
   );
 }
