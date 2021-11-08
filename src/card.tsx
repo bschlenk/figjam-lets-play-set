@@ -1,6 +1,7 @@
 import { ICard, extractCardAttributes } from './model';
 import { range } from './range';
 import { Shape } from './shape';
+import { CARD_SHADOW } from './styles';
 
 const { AutoLayout } = figma.widget;
 
@@ -25,12 +26,7 @@ export function Card({ card, selected, onClick }: Props) {
       stroke={selected ? '#16abff' : undefined}
       strokeWidth={3}
       fill="#fff"
-      effect={{
-        type: 'drop-shadow',
-        offset: { x: 0, y: 2 },
-        blur: 6,
-        color: { r: 0, g: 0, b: 0, a: 0.25 },
-      }}
+      effect={CARD_SHADOW}
       onClick={() => {
         onClick(card);
       }}
