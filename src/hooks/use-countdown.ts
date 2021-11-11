@@ -2,13 +2,10 @@ const { useSyncedState, useEffect, waitForTask } = figma.widget;
 
 export function useCountdown(onDone: () => void) {
   const [running, setRunning] = useSyncedState('countdown-running', false);
-  const [countdown, setCountdown] = useSyncedState<number | null>(
-    'countdown',
-    null,
-  );
+  const [countdown, setCountdown] = useSyncedState('countdown', 0);
 
   useEffect(() => {
-    if (countdown == null) return;
+    if (!running) return;
 
     function tick() {
       if (!running) return;
@@ -18,10 +15,9 @@ export function useCountdown(onDone: () => void) {
       if (nextCountdown === 0) {
         setRunning(false);
         onDone();
-        return;
+      } else {
+        setCountdown(nextCountdown);
       }
-
-      setCountdown(nextCountdown);
     }
 
     wait(tick, 1000);
