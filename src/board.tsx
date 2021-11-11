@@ -1,9 +1,9 @@
 import { ICard } from './model';
 import { Card, EmptyCard } from './card';
+import { CARD_ROWS, SPACING } from './constants';
+import { byChunks } from './utils';
 
-const { AutoLayout, Frame } = figma.widget;
-
-const SPACING = 16;
+const { AutoLayout } = figma.widget;
 
 interface Props {
   cards: ICard[];
@@ -14,23 +14,24 @@ interface Props {
 export function Board({ cards, selected, onClick }: Props) {
   return (
     <AutoLayout
-      direction="vertical"
+      direction="horizontal"
       width="hug-contents"
       height="hug-contents"
-      padding={{ top: SPACING - 2, bottom: 2 }}
+      spacing={SPACING - 12}
+      padding={{
+        top: SPACING - 4,
+        bottom: SPACING - 8,
+        left: SPACING - 6,
+        right: SPACING - 6,
+      }}
     >
-      {byChunks(cards, 4).map((row, i) => (
+      {byChunks(cards, CARD_ROWS).map((row, i) => (
         <AutoLayout
           key={i}
-          direction="horizontal"
+          direction="vertical"
           width="hug-contents"
           height="hug-contents"
-          padding={{
-            top: 2,
-            bottom: SPACING - 2,
-            left: SPACING,
-            right: SPACING,
-          }}
+          padding={{ top: 4, bottom: 8, left: 6, right: 6 }}
           spacing={SPACING}
         >
           {row.map((card) =>
@@ -48,23 +49,4 @@ export function Board({ cards, selected, onClick }: Props) {
       ))}
     </AutoLayout>
   );
-}
-
-function byChunks<T>(arr: T[], size: number): T[][] {
-  let chunks: T[][] = [];
-  let chunk: T[] = [];
-
-  for (const el of arr) {
-    chunk.push(el);
-    if (chunk.length === size) {
-      chunks.push(chunk);
-      chunk = [];
-    }
-  }
-
-  if (chunk.length) {
-    chunks.push(chunk);
-  }
-
-  return chunks;
 }

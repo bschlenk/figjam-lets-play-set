@@ -17,3 +17,22 @@ export function addOrRemove<T>(arr: T[], item: T) {
   copy.splice(idx, 1);
   return copy;
 }
+
+export function byChunks<T>(arr: T[], size: number): T[][] {
+  const chunks: T[][] = [];
+  let chunk: T[] = [];
+
+  for (const el of arr) {
+    chunk.push(el);
+    if (chunk.length === size) {
+      chunks.push(chunk);
+      chunk = [];
+    }
+  }
+
+  if (chunk.length) {
+    chunks.push(chunk);
+  }
+
+  return chunks;
+}
