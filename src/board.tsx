@@ -1,7 +1,7 @@
-import { Card } from './card';
 import { ICard } from './model';
+import { Card, EmptyCard } from './card';
 
-const { AutoLayout } = figma.widget;
+const { AutoLayout, Frame } = figma.widget;
 
 const SPACING = 16;
 
@@ -33,13 +33,17 @@ export function Board({ cards, selected, onClick }: Props) {
           }}
           spacing={SPACING}
         >
-          {row.map((card) => (
-            <Card
-              card={card}
-              onClick={onClick}
-              selected={selected.includes(card)}
-            />
-          ))}
+          {row.map((card) =>
+            card == null ? (
+              <EmptyCard />
+            ) : (
+              <Card
+                card={card}
+                onClick={onClick}
+                selected={selected.includes(card)}
+              />
+            ),
+          )}
         </AutoLayout>
       ))}
     </AutoLayout>

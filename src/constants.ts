@@ -7,6 +7,10 @@ export const CARD_RADIUS = 20;
 
 export const TOTAL_CARDS = Math.pow(BOARD_ROWS, BOARD_COLUMNS);
 
+// Cards have an aspect ratio of 8 / 11.5
+export const CARD_WIDTH = 120;
+export const CARD_HEIGHT = 168;
+
 export const COLOR_RED = '#FD001A';
 export const COLOR_GREEN = '#00CC3F';
 export const COLOR_PURPLE = '#A142F5';

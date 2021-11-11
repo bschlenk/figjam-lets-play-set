@@ -1,9 +1,9 @@
 import { ICard, extractCardAttributes } from './model';
 import { range } from './range';
 import { Shape } from './shape';
-import { CARD_SHADOW } from './constants';
+import { CARD_HEIGHT, CARD_SHADOW, CARD_WIDTH } from './constants';
 
-const { AutoLayout } = figma.widget;
+const { AutoLayout, Frame } = figma.widget;
 
 interface Props {
   card: ICard;
@@ -20,8 +20,8 @@ export function Card({ card, selected, onClick }: Props) {
       direction="vertical"
       horizontalAlignItems="center"
       verticalAlignItems="center"
-      width={120}
-      height={168}
+      width={CARD_WIDTH}
+      height={CARD_HEIGHT}
       cornerRadius={8}
       stroke={selected ? '#16abff' : undefined}
       strokeWidth={3}
@@ -36,4 +36,8 @@ export function Card({ card, selected, onClick }: Props) {
       ))}
     </AutoLayout>
   );
+}
+
+export function EmptyCard() {
+  return <Frame width={CARD_WIDTH} height={CARD_HEIGHT} />;
 }
