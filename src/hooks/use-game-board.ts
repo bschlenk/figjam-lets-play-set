@@ -1,4 +1,5 @@
-import { createDeck, ICard, IDeck } from '../model';
+import { createDeck, ICard, IDeck, isSet } from '../model';
+import { combinations } from '../utils';
 
 const { useSyncedState, useEffect } = figma.widget;
 
@@ -9,6 +10,7 @@ interface GameBoard {
   deckEmpty: () => boolean;
   replace: (cardsToReplace: ICard[]) => void;
   add: () => void;
+  hasSets: () => boolean;
 }
 
 export function useGameBoard(): GameBoard | null {
@@ -87,5 +89,11 @@ export function useGameBoard(): GameBoard | null {
     setCardIndex(index);
   }
 
-  return { cards, deckEmpty, replace, add };
+  function hasSets(): boolean {
+    const nonNullCards = cards.filter((card) => card != null);
+    const possibleSets = combinations(nonNullCards, 3);
+    return possibleSets.some(isSet);
+  }
+
+  return { cards, deckEmpty, replace, add, hasSets };
 }
