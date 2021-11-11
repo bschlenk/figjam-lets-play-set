@@ -6,6 +6,7 @@
     "target": "esnext",
     "lib": ["esnext"],
     "outDir": "dist",
+    "esModuleInterop": true,
     "typeRoots": ["./node_modules/@types", "./node_modules/@figma"]
   },
   "include": ["src"]
