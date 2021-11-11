@@ -1,7 +1,7 @@
 import { ICard, extractCardAttributes } from './model';
 import { range } from './range';
 import { Shape } from './shape';
-import { CARD_SHADOW } from './styles';
+import { CARD_SHADOW } from './constants';
 
 const { AutoLayout } = figma.widget;
 

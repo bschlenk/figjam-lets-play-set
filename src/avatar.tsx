@@ -1,5 +1,5 @@
 import { IUser, Key } from './types';
-import { COLOR_PRIMARY } from './styles';
+import { COLOR_PRIMARY } from './constants';
 
 const { Image, Frame, AutoLayout, Text } = figma.widget;
 
