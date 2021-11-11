@@ -1,12 +1,3 @@
-export const BOARD_COLUMNS = 4;
-export const BOARD_ROWS = 3;
-export const CARD_ASPECT_RATIO = 8 / 11.5;
-export const BACKGROUND_COLOR = '#333';
-export const CARD_COLOR = '#EEE';
-export const CARD_RADIUS = 20;
-
-export const TOTAL_CARDS = Math.pow(BOARD_ROWS, BOARD_COLUMNS);
-
 // Cards have an aspect ratio of 8 / 11.5
 export const CARD_WIDTH = 120;
 export const CARD_HEIGHT = 168;
