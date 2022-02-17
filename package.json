@@ -6,7 +6,8 @@
   "license": "MIT",
   "main": "bundle.js",
   "scripts": {
-    "build": "esbuild --bundle --minify --target=es2016 src/index.ts > bundle.js",
+    "build": "npm run check && esbuild --bundle --minify --target=es2016 src/index.ts > bundle.js",
+    "check": "tsc",
     "start": "nodemon --watch src --ext 'ts,tsx' --exec 'npm run build'"
   },
   "devDependencies": {
