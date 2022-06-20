@@ -30,6 +30,7 @@ export function Card({ card, selected, onClick }: Props) {
       onClick={() => {
         onClick(card);
       }}
+      hoverStyle={{ fill: '#fafafa' }}
     >
       {range(count + 1, (i) => (
         <Shape key={i} color={color} shape={shape} shade={shade} />
