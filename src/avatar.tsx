@@ -31,19 +31,24 @@ export function Avatar({ user, badge, active, key }: Props) {
   return (
     <Frame key={key} width={SIZE} height={SIZE}>
       {image}
-      <AutoLayout
+      <Frame
         x={64}
         y={4}
-        direction="horizontal"
-        horizontalAlignItems="center"
+        width={20}
+        height={20}
         fill="#52b6ff"
         cornerRadius={1000}
-        padding={{ vertical: 4, horizontal: 8 }}
       >
-        <Text fill="#fff" width="hug-contents">
+        <Text
+          fill="#fff"
+          height={20}
+          width={20}
+          horizontalAlignText="center"
+          x={4}
+        >
           {badge}
         </Text>
-      </AutoLayout>
+      </Frame>
     </Frame>
   );
 }

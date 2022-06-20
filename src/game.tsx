@@ -50,7 +50,7 @@ export function Game({ users }: Props) {
         direction="vertical"
         horizontalAlignItems="center"
         spacing={8}
-        padding={{ top: 16, bottom: 16 }}
+        padding={{ vertical: 16 }}
       >
         <AvatarList showScores active={users.activeUser} users={users.users} />
         <Board

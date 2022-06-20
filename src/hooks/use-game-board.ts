@@ -17,7 +17,7 @@ export function useGameBoard(): GameBoard | null {
   const [deck, setDeck] = useSyncedState<IDeck | null>('deck', null);
   const [deckReady, setDeckReady] = useSyncedState('deck-ready', false);
   const [cards, setCards] = useSyncedState<ICard[]>('board', null);
-  const [cardIndex, setCardIndex] = useSyncedState('card-index', 12);
+  const [cardIndex, setCardIndex] = useSyncedState('card-index', BOARD_SIZE);
 
   useEffect(() => {
     if (!deckReady) {
