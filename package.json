@@ -11,13 +11,10 @@
     "start": "nodemon --watch src --ext 'ts,tsx' --exec 'npm run build'"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.42.1",
-    "@figma/widget-typings": "^1.0.3",
-    "esbuild": "^0.14.22",
-    "nodemon": "^2.0.15",
-    "typescript": "^4.5.5"
-  },
-  "dependencies": {
-    "xstate": "^4.30.1"
+    "@figma/plugin-typings": "^1.47.0",
+    "@figma/widget-typings": "^1.4.0",
+    "esbuild": "^0.14.46",
+    "nodemon": "^2.0.16",
+    "typescript": "^4.7.4"
   }
 }
