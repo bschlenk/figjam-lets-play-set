@@ -23,11 +23,7 @@ export function Countdown({ size, value }: Props) {
   }).reverse();
 
   return (
-    <AutoLayout
-      spacing={8}
-      padding={{ vertical: 9, horizontal: 0 }}
-      verticalAlignItems="end"
-    >
+    <AutoLayout spacing={8} padding={{ vertical: 7 }} verticalAlignItems="end">
       {numbers}
     </AutoLayout>
   );
