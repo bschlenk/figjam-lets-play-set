@@ -1,4 +1,4 @@
-import { createDeck, ICard, IDeck, isSet } from '../model';
+import { createDeck, ICard, IDeck, isSet, shuffle } from '../model';
 import { combinations } from '../utils';
 
 const { useSyncedState, useEffect } = figma.widget;
@@ -21,7 +21,8 @@ export function useGameBoard(): GameBoard | null {
 
   useEffect(() => {
     if (!deckReady) {
-      const deck = createDeck();
+      const deck = shuffle(createDeck());
+
       const cards = deck.slice(0, BOARD_SIZE);
 
       setDeckReady(true);

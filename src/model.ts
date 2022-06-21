@@ -1,4 +1,5 @@
 import { AttrColor, AttrCount, AttrShade, AttrShape } from './attributes';
+import { allSameOrAllDifferent, zip } from './utils';
 
 export type ICard = number;
 export type IDeck = number[];
@@ -34,13 +35,13 @@ export function createDeck() {
     }
   }
 
-  return shuffle(deck);
+  return deck;
 }
 
 /**
- * Return whether this is a valid set. A valid set is
- * one that conforms to the rules of set.
- * @return Whether this set is valid.
+ * Return whether this is a valid set. A set is 3 cards, where each attribute
+ * (count, shape, color, shade) is either the same on all cards, or unique on
+ * each card.
  */
 export function isSet(cards: ICard[]): boolean {
   if (cards.length !== 3) {
@@ -50,27 +51,19 @@ export function isSet(cards: ICard[]): boolean {
   return attributes.every(allSameOrAllDifferent);
 }
 
-function allSameOrAllDifferent(values: any[]): boolean {
-  const uniqueCount = new Set(values).size;
-  return uniqueCount === 1 || uniqueCount === values.length;
-}
-
 /**
- * Zip all the arrays together, like python's zip method.
- * Assumes all the arrays are of the same size.
- * @param values The values to zip.
+ * Takes a deck and returns a new shuffled deck. The shuffling method is to
+ * take one card at random from the given deck and place it in the new deck,
+ * until there are no more cards to take.
+ *
+ * This feels more random than the swap method you typically find on stack
+ * overflow. That one relies on X number of swaps, and always swaps one
+ * card with another. The issue with that is, given X swaps, with 2 cards
+ * chosen at random per swap, you statistically won't even shuffle every
+ * card. I noticed this resulting in much more sets available at a time, due
+ * likely to the predictable way the original deck is generated.
  */
-function zip<T>(values: ReadonlyArray<T>[]): T[][] {
-  const length = values[0].length;
-  const zipped = [];
-  for (let i = 0; i < length; ++i) {
-    const row = values.map((v) => v[i]);
-    zipped.push(row);
-  }
-  return zipped;
-}
-
-function shuffle(deck: IDeck): IDeck {
+export function shuffle(deck: IDeck): IDeck {
   deck = [...deck];
   const newDeck: IDeck = [];
 

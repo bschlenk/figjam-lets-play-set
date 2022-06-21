@@ -69,3 +69,23 @@ export function combinations<T>(arr: T[], r: number): T[][] {
 
   return combinations;
 }
+
+export function allSameOrAllDifferent(values: any[]): boolean {
+  const uniqueCount = new Set(values).size;
+  return uniqueCount === 1 || uniqueCount === values.length;
+}
+
+/**
+ * Zip all the arrays together, like python's zip method.
+ * Assumes all the arrays are of the same size.
+ * @param values The values to zip.
+ */
+export function zip<T>(values: ReadonlyArray<T>[]): T[][] {
+  const length = values[0].length;
+  const zipped = [];
+  for (let i = 0; i < length; ++i) {
+    const row = values.map((v) => v[i]);
+    zipped.push(row);
+  }
+  return zipped;
+}
