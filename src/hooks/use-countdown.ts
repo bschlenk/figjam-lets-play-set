@@ -1,4 +1,6 @@
-const { useSyncedState, useEffect, waitForTask } = figma.widget;
+import { wait } from '../utils';
+
+const { useSyncedState, useEffect } = figma.widget;
 
 export function useCountdown(onDone: () => void) {
   const [running, setRunning] = useSyncedState('countdown-running', false);
@@ -39,15 +41,4 @@ export function useCountdown(onDone: () => void) {
   }
 
   return { start, cancel, countdown };
-}
-
-function wait(callback: () => void, timeout: number) {
-  waitForTask(
-    new Promise<void>((resolve) => {
-      setTimeout(() => {
-        callback();
-        resolve();
-      }, timeout);
-    }),
-  );
 }

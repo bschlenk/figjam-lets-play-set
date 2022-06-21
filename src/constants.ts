@@ -19,3 +19,9 @@ export const CARD_SHADOW: WidgetJSX.Effect = {
   blur: 6,
   color: { r: 0, g: 0, b: 0, a: 0.25 },
 };
+
+export const enum Variant {
+  Active = '#52b6ff', // Primary
+  Success = '#00CC3F', // Green
+  Failure = '#FD001A', // Red
+}

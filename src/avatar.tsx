@@ -1,5 +1,5 @@
 import { IUser, Key } from './types';
-import { COLOR_PRIMARY } from './constants';
+import { COLOR_PRIMARY, Variant } from './constants';
 
 const { Image, Frame, AutoLayout, Text } = figma.widget;
 
@@ -8,14 +8,14 @@ const SIZE = 96;
 interface Props {
   user: IUser;
   badge?: string | number;
-  active?: boolean;
+  variant?: Variant;
   key?: Key;
 }
 
-export function Avatar({ user, badge, active, key }: Props) {
+export function Avatar({ user, badge, variant, key }: Props) {
   const image = (
     <Image
-      stroke={active ? COLOR_PRIMARY : '#fff'}
+      stroke={variant || '#fff'}
       strokeWidth={4}
       cornerRadius={SIZE}
       width={SIZE}

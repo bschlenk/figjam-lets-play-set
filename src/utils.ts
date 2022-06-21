@@ -1,3 +1,5 @@
+const { waitForTask } = figma.widget;
+
 export function remove<T>(arr: T[], item: T) {
   const idx = arr.indexOf(item);
   if (idx === -1) {
@@ -88,4 +90,15 @@ export function zip<T>(values: ReadonlyArray<T>[]): T[][] {
     zipped.push(row);
   }
   return zipped;
+}
+
+export function wait(callback: () => void, timeout: number) {
+  waitForTask(
+    new Promise<void>((resolve) => {
+      setTimeout(() => {
+        callback();
+        resolve();
+      }, timeout);
+    }),
+  );
 }

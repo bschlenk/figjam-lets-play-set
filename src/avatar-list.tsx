@@ -1,4 +1,5 @@
 import { Avatar } from './avatar';
+import { Variant } from './constants';
 import { IUser } from './types';
 
 const { AutoLayout } = figma.widget;
@@ -7,9 +8,15 @@ interface Props {
   users: IUser[];
   showScores?: boolean;
   active?: string;
+  activeVariant?: Variant;
 }
 
-export function AvatarList({ users, showScores, active }: Props) {
+export function AvatarList({
+  users,
+  showScores,
+  active,
+  activeVariant,
+}: Props) {
   if (users.length === 0) {
     return null;
   }
@@ -21,7 +28,9 @@ export function AvatarList({ users, showScores, active }: Props) {
           key={i}
           user={user}
           badge={showScores ? user.score : undefined}
-          active={active === user.id}
+          variant={
+            active === user.id ? activeVariant || Variant.Active : undefined
+          }
         />
       ))}
     </AutoLayout>

@@ -1,17 +1,17 @@
 import { ICard, extractCardAttributes } from './model';
 import { range } from './range';
 import { Shape } from './shape';
-import { CARD_HEIGHT, CARD_SHADOW, CARD_WIDTH } from './constants';
+import { CARD_HEIGHT, CARD_SHADOW, CARD_WIDTH, Variant } from './constants';
 
 const { AutoLayout, Frame } = figma.widget;
 
 interface Props {
   card: ICard;
-  selected: boolean;
+  variant?: Variant;
   onClick: (card: ICard) => void;
 }
 
-export function Card({ card, selected, onClick }: Props) {
+export function Card({ card, variant, onClick }: Props) {
   const [count, color, shape, shade] = extractCardAttributes(card);
 
   return (
@@ -23,7 +23,7 @@ export function Card({ card, selected, onClick }: Props) {
       width={CARD_WIDTH}
       height={CARD_HEIGHT}
       cornerRadius={8}
-      stroke={selected ? '#16abff' : undefined}
+      stroke={variant}
       strokeWidth={3}
       fill="#fff"
       effect={CARD_SHADOW}

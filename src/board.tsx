@@ -1,6 +1,6 @@
 import { ICard } from './model';
 import { Card, EmptyCard } from './card';
-import { CARD_ROWS, SPACING } from './constants';
+import { CARD_ROWS, SPACING, Variant } from './constants';
 import { byChunks } from './utils';
 
 const { AutoLayout } = figma.widget;
@@ -8,10 +8,11 @@ const { AutoLayout } = figma.widget;
 interface Props {
   cards: ICard[];
   selected: ICard[];
+  cardVariant?: Variant;
   onClick: (card: ICard) => void;
 }
 
-export function Board({ cards, selected, onClick }: Props) {
+export function Board({ cards, selected, cardVariant, onClick }: Props) {
   return (
     <AutoLayout
       direction="horizontal"
@@ -41,7 +42,11 @@ export function Board({ cards, selected, onClick }: Props) {
               <Card
                 card={card}
                 onClick={onClick}
-                selected={selected.includes(card)}
+                variant={
+                  selected.includes(card)
+                    ? cardVariant || Variant.Active
+                    : undefined
+                }
               />
             ),
           )}
