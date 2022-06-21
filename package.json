@@ -6,9 +6,10 @@
   "license": "MIT",
   "main": "bundle.js",
   "scripts": {
-    "build": "npm run check && esbuild --bundle --minify --target=es2016 src/index.ts > bundle.js",
+    "build": "npm run check && npm run esbuild",
+    "esbuild": "esbuild --define:DEBUG=false --bundle --minify --target=es2016 src/index.ts > bundle.js",
     "check": "tsc",
-    "start": "nodemon --watch src --ext 'ts,tsx' --exec 'npm run build'"
+    "start": "nodemon --watch src --ext 'ts,tsx' --exec 'npm run build -- -- --define:DEBUG=true'"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.47.0",

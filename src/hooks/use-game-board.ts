@@ -22,7 +22,8 @@ export function useGameBoard(): GameBoard | null {
 
   useEffect(() => {
     if (!deckReady) {
-      const deck = shuffle(createDeck());
+      let deck = createDeck();
+      if (!DEBUG) deck = shuffle(deck);
 
       const cards = deck.slice(0, BOARD_SIZE);
 
