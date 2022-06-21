@@ -40,6 +40,11 @@ export function useUsers() {
     );
   }
 
+  function clear() {
+    setUsers([]);
+    setActiveUser(null);
+  }
+
   return {
     users,
     activeUser,
@@ -48,5 +53,6 @@ export function useUsers() {
     unsetActive,
     isActive,
     setScore,
+    clear,
   };
 }

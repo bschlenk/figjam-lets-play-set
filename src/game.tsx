@@ -1,8 +1,9 @@
+import { SELECTING_SECONDS, SPACING } from './constants';
 import { AvatarList } from './avatar-list';
 import { Board } from './board';
 import { Button } from './button';
-import { SELECTING_SECONDS, SPACING } from './constants';
 import { Countdown } from './countdown';
+import { WinScreen } from './win-screen';
 import { useCountdown } from './hooks/use-countdown';
 import { useGameBoard } from './hooks/use-game-board';
 import { UseUsers } from './hooks/use-users';
@@ -13,11 +14,12 @@ const { Frame, useSyncedState, AutoLayout } = figma.widget;
 
 interface Props {
   users: UseUsers;
+  onNewGame: () => void;
 }
 
 type GameState = 'IDLE' | 'SELECTING';
 
-export function Game({ users }: Props) {
+export function Game({ users, onNewGame }: Props) {
   const [gameState, setGameState] = useSyncedState<GameState>(
     'gameState',
     'IDLE',
@@ -39,6 +41,21 @@ export function Game({ users }: Props) {
 
   // you can't return null from the top of a widget, so we temporarily show a tiny frame
   if (!board) return <Frame width={1} height={1} />;
+
+  if (board.deckEmpty() && !board.hasSets()) {
+    return (
+      <WinScreen
+        users={users}
+        onNewGame={() => {
+          setGameState('IDLE');
+          setSelected([]);
+          board.reset();
+
+          onNewGame();
+        }}
+      />
+    );
+  }
 
   return (
     <AutoLayout

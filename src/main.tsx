@@ -18,5 +18,13 @@ export function Widget() {
     );
   }
 
-  return <Game users={users} />;
+  return (
+    <Game
+      users={users}
+      onNewGame={() => {
+        users.clear();
+        setReady(false);
+      }}
+    />
+  );
 }

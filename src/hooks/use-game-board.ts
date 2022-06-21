@@ -11,6 +11,7 @@ interface GameBoard {
   replace: (cardsToReplace: ICard[]) => void;
   add: () => void;
   hasSets: () => boolean;
+  reset: () => void;
 }
 
 export function useGameBoard(): GameBoard | null {
@@ -96,5 +97,12 @@ export function useGameBoard(): GameBoard | null {
     return possibleSets.some(isSet);
   }
 
-  return { cards, deckEmpty, replace, add, hasSets };
+  function reset() {
+    setDeck(null);
+    setDeckReady(false);
+    setCards(null);
+    setCardIndex(BOARD_SIZE);
+  }
+
+  return { cards, deckEmpty, replace, add, hasSets, reset };
 }
