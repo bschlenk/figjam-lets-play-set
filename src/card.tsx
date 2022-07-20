@@ -1,5 +1,5 @@
 import { ICard, extractCardAttributes } from './model';
-import { range } from './range';
+import { range } from './utils';
 import { Shape } from './shape';
 import { CARD_HEIGHT, CARD_SHADOW, CARD_WIDTH, Variant } from './constants';
 

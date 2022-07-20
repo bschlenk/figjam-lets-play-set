@@ -1,4 +1,4 @@
-import { range } from './range';
+import { range } from './utils';
 
 const { AutoLayout, Text } = figma.widget;
 

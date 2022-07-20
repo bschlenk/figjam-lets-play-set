@@ -1,5 +1,13 @@
 const { waitForTask } = figma.widget;
 
+export function range<T>(count: number, fn: (i: number) => T) {
+  const items: T[] = [];
+  for (let i = 0; i < count; ++i) {
+    items.push(fn(i));
+  }
+  return items;
+}
+
 export function remove<T>(arr: T[], item: T) {
   const idx = arr.indexOf(item);
   if (idx === -1) {
