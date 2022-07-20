@@ -49,33 +49,22 @@ export function byChunks<T>(arr: T[], size: number): T[][] {
 
 export function combinations<T>(arr: T[], r: number): T[][] {
   const combinations: T[][] = [];
-
-  const n = arr.length;
-
   const data: T[] = [];
+  const end = arr.length;
 
-  const combinationUtil = (
-    arr: T[],
-    data: T[],
-    start: number,
-    end: number,
-    index: number,
-    r: number,
-  ) => {
+  function combinationUtil(start: number, index: number) {
     if (index === r) {
       combinations.push([...data]);
       return;
     }
 
-    let i = start;
-    while (i <= end && end - i + 1 >= r - index) {
+    for (let i = start; i < end && end - i >= r - index; ++i) {
       data[index] = arr[i];
-      combinationUtil(arr, data, i + 1, end, index + 1, r);
-      ++i;
+      combinationUtil(i + 1, index + 1);
     }
-  };
+  }
 
-  combinationUtil(arr, data, 0, n - 1, 0, r);
+  combinationUtil(0, 0);
 
   return combinations;
 }
